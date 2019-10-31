@@ -45,9 +45,6 @@
     <ClInclude Include="Resource.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="ActionGame.h">
-      <Filter>ヘッダー ファイル\App</Filter>
-    </ClInclude>
     <ClInclude Include="CDotEatApp.h">
       <Filter>ヘッダー ファイル\App</Filter>
     </ClInclude>
@@ -102,13 +99,13 @@
     <ClInclude Include="CText.h">
       <Filter>ヘッダー ファイル\View</Filter>
     </ClInclude>
+    <ClInclude Include="Kadai.h">
+      <Filter>ヘッダー ファイル\App</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="ActionGame.cpp">
-      <Filter>ソース ファイル\App</Filter>
     </ClCompile>
     <ClCompile Include="CDotEatApp.cpp">
       <Filter>ソース ファイル\App</Filter>
@@ -151,6 +148,9 @@
     </ClCompile>
     <ClCompile Include="CText.cpp">
       <Filter>ソース ファイル\View</Filter>
+    </ClCompile>
+    <ClCompile Include="Kadai.cpp">
+      <Filter>ソース ファイル\App</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

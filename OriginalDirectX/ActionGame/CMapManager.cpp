@@ -173,10 +173,10 @@ void CMapManager::update(int frameCnt_, int inputX_, int inputY_, eGravityDirect
 	{
 		if (dir_ != eGNone)	m_pPlayer->setGravityDirection(dir_);
 		m_animIndexPlayer = m_pPlayer->getAnimIndex();
-		m_pPlayer->gravityProc();
+		//m_pPlayer->gravityProc();
 		m_pPlayer->moveHorizone(inputX_);
 		m_pPlayer->moveVertical(inputY_);
-		if (jump_)	m_pPlayer->jump();
+		//if (jump_)	m_pPlayer->jump();
 		m_pPlayer->offsetPos(m_pPlayer->getSpeed());
 		m_pPlayer->recomposeColPos();
 		XMFLOAT4 checkPos = {};

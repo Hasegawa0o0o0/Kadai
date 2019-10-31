@@ -111,19 +111,19 @@ void CPlayer::jump()
 // ¶‰EˆÚ“®
 void CPlayer::moveHorizone(int x_)
 {
-	if (m_gravityDirection == eGDown || m_gravityDirection == eGUp)
-	{
+	//if (m_gravityDirection == eGDown || m_gravityDirection == eGUp)
+	//{
 		m_speed.x = x_ * 2;
-	}
+	//}
 }
 
 // ã‰ºˆÚ“®
 void CPlayer::moveVertical(int y_)
 {
-	if (m_gravityDirection == eGRight || m_gravityDirection == eGLeft)
-	{
+	//if (m_gravityDirection == eGRight || m_gravityDirection == eGLeft)
+	//{
 		m_speed.y = y_ * 2;
-	}
+	//}
 }
 
 // ŒÄ‚Î‚ê‚Ä‚¢‚éŠÔ—h‚ç‚·
