@@ -17,12 +17,8 @@ class CPlayer : public CMapChip {
 	typedef CMapChip supre;
 
 	PartiallyCol m_partCol						= {};		// 部分的な衝突判定
-	FLOAT m_jumpPower							= 0.0f;		// ジャンプの初速
-	const FLOAT kGravityScaleMax				= 3.0f;		// 重力の最大値
-	BOOL m_isGround								= FALSE;	// 地面に立っているか
-	eGravityDirection m_gravityDirection		= eGNone;	// 重力が働く方向
-	int m_rattlingFrame							= 0;		// 地面に落ちた時震えるフレーム数
-	int m_shakeSign								= 1;		// 揺らすときの符号
+	//eGravityDirection m_gravityDirection		= eGNone;	// 重力が働く方向
+	//int m_shakeSign								= 1;		// 揺らすときの符号
 	vector<unique_ptr<CPicture>> m_debugRect;				// デバッグ用判定可視化
 public:
 	static std::unique_ptr<CPlayer> create(
@@ -43,8 +39,6 @@ public:
 		XMFLOAT2				size_,				//!< スプライトの大きさ
 		MapIndex				index_,				//!< マップの位置(x, y)
 		std::vector<QuadrangleTexel>	texels);			//!< テクセルの配列
-	// 重力演算
-	void gravityProc();
 	// 当たり判定を自分の位置に合わせる
 	void recomposeColPos()
 	{
@@ -57,28 +51,13 @@ public:
 		m_partCol.left.pos = { getPos().x - getSize().x / 2.0f, getPos().y,
 			0.0f,0.0f };
 	}
-	// ジャンプ
-	void jump();
 	// 横移動(重力が上下のどちらかの時)
 	void moveHorizone(int x_);
 	// 縦移動(重力が左右のどちらかの時)
 	void moveVertical(int y_);
 	// 引数で渡された値で地面に立っているか判定し、オフセットする
 	void checkAndOffset(XMFLOAT4 check_);
-	// 呼ばれている間揺らす
-	void shake();
-	// 震えるフレーム数をカウントする
-	void CountUpRattlingFrame() {
-		++m_rattlingFrame;
-		if (m_rattlingFrame > 90)	++m_rattlingFrame;
-		if (m_rattlingFrame > 150)	++m_rattlingFrame;
-	}
-	int getRattlingFrame()const { return m_rattlingFrame; }
 	PartiallyCol getPartCol()const { return m_partCol; }
-	void setGround(BOOL isGrd_) { m_isGround = isGrd_; }
-	BOOL getGround()const { return m_isGround; }
-	void setGravityDirection(eGravityDirection dir_) { m_gravityDirection = dir_;	m_animIndex = dir_; }
-	eGravityDirection getGravityDirection() { return m_gravityDirection; }
 	int getAnimIndex()const { return m_animIndex; }
 	void debugRectRender(XMFLOAT4X4 matView_, XMFLOAT4X4 matProj_, shared_ptr<CTexture> texture_)
 	{

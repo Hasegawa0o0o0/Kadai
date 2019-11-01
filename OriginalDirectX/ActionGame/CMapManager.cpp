@@ -158,37 +158,20 @@ void CMapManager::update(int frameCnt_, int inputX_, int inputY_, eGravityDirect
 		m_animIndexDot++;		m_animIndexDot		= m_animIndexDot	>= gTexel1_3.size() ? 0 : m_animIndexDot;
 		m_animIndexEnemy++;		m_animIndexEnemy	= m_animIndexEnemy	>= gTexel1_3.size() ? 0 : m_animIndexEnemy;
 	}
-	//
-	//movePlayer(dir_);
-
-	//if (m_pPlayer->getGround() && m_pPlayer->getRattlingFrame() != 0)
-	//{
-	//	m_pPlayer->shake();
-	//}
-	//else if (!m_pPlayer->getGround())
-	//{
-	//	m_pPlayer->CountUpRattlingFrame();
-	//}
-	if (!m_pPlayer->getGround() || m_pPlayer->getRattlingFrame() == 0)
+	m_animIndexPlayer = m_pPlayer->getAnimIndex();
+	m_pPlayer->moveHorizone(inputX_);
+	m_pPlayer->moveVertical(inputY_);
+	m_pPlayer->offsetPos(m_pPlayer->getSpeed());
+	m_pPlayer->recomposeColPos();
+	XMFLOAT4 checkPos = {};
+	checkPos.y -= isHitBlock(m_pPlayer->getPartCol().head.pos, m_pPlayer->getPartCol().head.size, eY);
+	checkPos.y += isHitBlock(m_pPlayer->getPartCol().foot.pos, m_pPlayer->getPartCol().foot.size, eY);
+	checkPos.x -= isHitBlock(m_pPlayer->getPartCol().right.pos, m_pPlayer->getPartCol().right.size, eX);
+	checkPos.x += isHitBlock(m_pPlayer->getPartCol().left.pos, m_pPlayer->getPartCol().left.size, eX);
+	m_pPlayer->checkAndOffset(checkPos);
+	if (m_pPlayer->collisionRect(m_pGoal->getPos(), {16.0f, 16.0f} ))
 	{
-		if (dir_ != eGNone)	m_pPlayer->setGravityDirection(dir_);
-		m_animIndexPlayer = m_pPlayer->getAnimIndex();
-		//m_pPlayer->gravityProc();
-		m_pPlayer->moveHorizone(inputX_);
-		m_pPlayer->moveVertical(inputY_);
-		//if (jump_)	m_pPlayer->jump();
-		m_pPlayer->offsetPos(m_pPlayer->getSpeed());
-		m_pPlayer->recomposeColPos();
-		XMFLOAT4 checkPos = {};
-		checkPos.y -= isHitBlock(m_pPlayer->getPartCol().head.pos, m_pPlayer->getPartCol().head.size, eY);
-		checkPos.y += isHitBlock(m_pPlayer->getPartCol().foot.pos, m_pPlayer->getPartCol().foot.size, eY);
-		checkPos.x -= isHitBlock(m_pPlayer->getPartCol().right.pos, m_pPlayer->getPartCol().right.size, eX);
-		checkPos.x += isHitBlock(m_pPlayer->getPartCol().left.pos, m_pPlayer->getPartCol().left.size, eX);
-		m_pPlayer->checkAndOffset(checkPos);
-		if (m_pPlayer->collisionRect(m_pGoal->getPos(), {16.0f, 16.0f} ))
-		{
-			throw eGameClear;
-		}
+		throw eGameClear;
 	}
 	if (frameCnt_ % 10 == 0)
 	{
