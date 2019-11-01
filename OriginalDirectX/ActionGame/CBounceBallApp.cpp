@@ -46,7 +46,7 @@ void CBounceBallApp::createTexture()
 	m_pvTexture.push_back(CTexture::create(m_pDevice, Tex_Clear));
 	m_pvTexture.push_back(CTexture::create(m_pDevice, Tex_Over));
 	m_pvTexture.push_back(CTexture::create(m_pDevice, Tex_Background));
-	m_pvTexture.push_back(CTexture::create(m_pDevice, Tex_Player));
+	m_pvTexture.push_back(CTexture::create(m_pDevice, Tex_KadaiPlayer));
 	m_pvTexture.push_back(CTexture::create(m_pDevice, Tex_Block));
 	m_pvTexture.push_back(CTexture::create(m_pDevice, Tex_Dot));
 	m_pvTexture.push_back(CTexture::create(m_pDevice, Tex_Font));

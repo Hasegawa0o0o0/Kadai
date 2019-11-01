@@ -37,6 +37,7 @@
 #define Tex_Dot				L"Media/Sprite/DotEat/Dot.png"
 #define Tex_Enemy			L"Media/Sprite/DotEat/Enemy.png"
 #define Tex_Player			L"Media/Sprite/DotEat/GravityPlayer.png"
+#define Tex_KadaiPlayer		L"Media/Sprite/DotEat/PlayerChar.tif"
 #define Tex_Reserved1		L"Media/Sprite/Reserved1.png"
 #define Tex_Reserved2		L"Media/Sprite/Reserved2.png"
 #define Tex_Reserved3		L"Media/Sprite/Reserved3.png"
