@@ -1,9 +1,4 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(387,5): warning MSB8028: 中間ディレクトリ (Debug\) に別のプロジェクト (ActionGame.vcxproj) と共有されているファイルが含まれています。これにより、クリーンしてリビルド動作が適切に行われない可能性があります。
-  CPlayer.cpp
-c:\users\yuuta\desktop\kadai\originaldirectx\actiongame\cplayer.cpp(116): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
-c:\users\yuuta\desktop\kadai\originaldirectx\actiongame\cplayer.cpp(125): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
   CMapManager.cpp
-  Kadai.cpp
-  コードを生成中...
   ActionGame.vcxproj -> C:\Users\yuuta\Desktop\Kadai\OriginalDirectX\Debug\Kadai.exe
   ActionGame.vcxproj -> C:\Users\yuuta\Desktop\Kadai\OriginalDirectX\Debug\Kadai.pdb (Partial PDB)

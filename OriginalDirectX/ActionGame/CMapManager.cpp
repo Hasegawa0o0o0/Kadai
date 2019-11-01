@@ -161,14 +161,14 @@ void CMapManager::update(int frameCnt_, int inputX_, int inputY_, eGravityDirect
 	//
 	//movePlayer(dir_);
 
-	if (m_pPlayer->getGround() && m_pPlayer->getRattlingFrame() != 0)
-	{
-		m_pPlayer->shake();
-	}
-	else if (!m_pPlayer->getGround())
-	{
-		m_pPlayer->CountUpRattlingFrame();
-	}
+	//if (m_pPlayer->getGround() && m_pPlayer->getRattlingFrame() != 0)
+	//{
+	//	m_pPlayer->shake();
+	//}
+	//else if (!m_pPlayer->getGround())
+	//{
+	//	m_pPlayer->CountUpRattlingFrame();
+	//}
 	if (!m_pPlayer->getGround() || m_pPlayer->getRattlingFrame() == 0)
 	{
 		if (dir_ != eGNone)	m_pPlayer->setGravityDirection(dir_);
