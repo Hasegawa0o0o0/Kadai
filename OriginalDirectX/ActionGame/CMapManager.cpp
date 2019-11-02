@@ -58,6 +58,7 @@ vector <QuadrangleTexel>  gTexel1_1 = {
 	QuadrangleTexel{ { 0, 1.0f },{ 0, 0.0f },{ 1, 1.0f },{ 1, 0.0f } }
 };
 
+static std::vector <QuadrangleTexel> gTexel8_7;
 
 /**
 * @fn std::unique_ptr<CMapManager> CMapManager::create(ID3D11Device* pDevice_, ID3D11DeviceContext* pDeviceContext_, D3D11_VIEWPORT viewPort_[], LPCWSTR shaderName_,)
@@ -90,6 +91,11 @@ std::unique_ptr<CMapManager> CMapManager::create(
 */
 void CMapManager::init(ID3D11Device* pDevice_, ID3D11DeviceContext* pDeviceContext_, D3D11_VIEWPORT viewPort_[], LPCWSTR shaderName_)
 {
+	// ñ≥óùÇ‚ÇËUVç¿ïWçÏê¨
+	if (gTexel8_7.size() <= 0)
+	{
+		gTexel8_7.push_back(QuadrangleTexel{ { k1_7 * 0, k1_8 * 1 },{ k1_7 * 0, k1_8 * 0 },{ k1_7 * 1, k1_8 * 1 },{ k1_7 * 1, k1_8 * 0 } });
+	}
 	for (int y = 0; y < kMapVertical; y++)
 	{
 		for (int x = 0; x < kMapHorizontal; x++)
@@ -110,7 +116,7 @@ void CMapManager::init(ID3D11Device* pDevice_, ID3D11DeviceContext* pDeviceConte
 				gMap[y][x].chip->setName("Empty");
 				break;
 			case ePlayer:
-				m_pPlayer		= CPlayer::create(pDevice_, pDeviceContext_, viewPort_, HLSL_PlaneHLSL, Tex_Player, kPlayerSize, { x, y }, gTexel1_4);
+				m_pPlayer		= CPlayer::create(pDevice_, pDeviceContext_, viewPort_, HLSL_PlaneHLSL, Tex_Player, kPlayerSize, { x, y }, gTexel8_7);
 				break;
 			case eEnemy:
 				m_pEnemy		= CMapChip::create(pDevice_, pDeviceContext_, viewPort_, HLSL_PlaneHLSL, Tex_Enemy, kEnemySize, { x, y }, gTexel1_3);

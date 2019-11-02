@@ -32,6 +32,7 @@ const FLOAT k1_3	= 1.0f /  3;
 const FLOAT k1_4	= 1.0f /  4;
 const FLOAT k1_5	= 1.0f /  5;
 const FLOAT k1_8	= 1.0f /  8;
+const FLOAT k1_7	= 1.0f /  7;
 const FLOAT k1_26	= 1.0f / 26;
 /* @} */
 
