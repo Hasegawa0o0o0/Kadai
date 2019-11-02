@@ -4,22 +4,30 @@
 #include "CMapChip.h"
 #include "MediaResource.h"
 
-typedef enum eGravityDirection {
-	eGDown = 0,
-	eGLeft = 1,
-	eGRight = 2,
-	eGUp = 3,
-	eGNone
+typedef enum eSpriteDirection {
+	eSpriteRight = 0,
+	eSpriteDownRight = 7,
+	eSpriteDown = 7 * 2,
+	eSpriteDownLeft = 7 * 3,
+	eSpriteLeft = 7 * 4,
+	eSpriteUpLeft = 7 * 5,
+	eSpriteUp = 7 * 6,
+	eSpriteUpRight = 7 * 7,
+	eSpriteNone
 }eGravityDirection;
 
 
 class CPlayer : public CMapChip {
 	typedef CMapChip supre;
 
-	PartiallyCol m_partCol						= {};		// 部分的な衝突判定
-	//eGravityDirection m_gravityDirection		= eGNone;	// 重力が働く方向
-	//int m_shakeSign								= 1;		// 揺らすときの符号
-	vector<unique_ptr<CPicture>> m_debugRect;				// デバッグ用判定可視化
+	PartiallyCol m_partCol						= {};			// 部分的な衝突判定
+	eSpriteDirection m_spriteDirection			= eSpriteNone;	// スプライトのキャラクターが向いている方向
+	int m_animMoveSpriteIndex					= 0;			// 表示している移動スプライト
+	const int kAnimMoveSpriteIndexMax			= 7;			// 移動スプライトの最大インデックス
+	int m_animFrame								= 0;			// アニメーションさせるまでのフレーム数
+	const int kAnimFrameMax						= 4;			// アニメーションさせるフレーム数
+	int m_footprintSign							= 1;			// 足跡を生成するための符号
+	vector<unique_ptr<CPicture>> m_debugRect;					// デバッグ用判定可視化
 public:
 	static std::unique_ptr<CPlayer> create(
 		ID3D11Device*			pDevice_,			//!< デバイス
@@ -51,10 +59,8 @@ public:
 		m_partCol.left.pos = { getPos().x - getSize().x / 2.0f, getPos().y,
 			0.0f,0.0f };
 	}
-	// 横移動(重力が上下のどちらかの時)
-	void moveHorizone(int x_);
-	// 縦移動(重力が左右のどちらかの時)
-	void moveVertical(int y_);
+	// 移動
+	void move(XMFLOAT4 speed_);
 	// 引数で渡された値で地面に立っているか判定し、オフセットする
 	void checkAndOffset(XMFLOAT4 check_);
 	PartiallyCol getPartCol()const { return m_partCol; }

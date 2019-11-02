@@ -41,16 +41,64 @@ void CPlayer::init(
 	m_debugRect.push_back(CPicture::create(pDevice_, pDeviceContext_, viewPort_, shaderName_, Tex_Dark, m_partCol.head.pos, m_partCol.head.size, texels));
 }
 
-// 左右移動
-void CPlayer::moveHorizone(int x_)
+// 移動
+void CPlayer::move(XMFLOAT4 speed_)
 {
-	m_speed.x = x_ * 2;
-}
-
-// 上下移動
-void CPlayer::moveVertical(int y_)
-{
-	m_speed.y = y_ * 2;
+	m_speed.x = speed_.x;
+	m_speed.y = speed_.y;
+	if ((int)m_speed.x == 0 && m_speed.y > 0.0f)
+	{
+		m_spriteDirection = eSpriteUp;
+	}
+	else if (m_speed.x > 0.0f && m_speed.y > 0.0f)
+	{
+		m_spriteDirection = eSpriteUpRight;
+	}
+	else if (m_speed.x > 0.0f && (int)m_speed.y == 0)
+	{
+		m_spriteDirection = eSpriteRight;
+	}
+	else if (m_speed.x > 0.0f && m_speed.y < 0.0f)
+	{
+		m_spriteDirection = eSpriteDownRight;
+	}
+	else if ((int)m_speed.x == 0 && m_speed.y < 0.0f)
+	{
+		m_spriteDirection = eSpriteDown;
+	}
+	else if (m_speed.x < 0.0f && m_speed.y < 0.0f)
+	{
+		m_spriteDirection = eSpriteDownLeft;
+	}
+	else if (m_speed.x < 0.0f && (int)m_speed.y == 0)
+	{
+		m_spriteDirection = eSpriteLeft;
+	}
+	else if (m_speed.x < 0.0f && m_speed.y > 0.0f)
+	{
+		m_spriteDirection = eSpriteUpLeft;
+	}
+	// 歩きアニメーション判定
+	m_animIndex = m_spriteDirection;
+	if ((int)m_speed.x == 0 && (int)m_speed.y == 0)
+	{
+		m_animMoveSpriteIndex = 0;
+		m_animFrame = 0;
+	}
+	else
+	{
+		++m_animFrame;
+		if (m_animFrame > kAnimFrameMax)
+		{
+			++m_animMoveSpriteIndex;
+			if (m_animMoveSpriteIndex >= kAnimMoveSpriteIndexMax)
+			{
+				m_animMoveSpriteIndex = 1;
+			}
+			m_animFrame = 0;
+		}
+	}
+	m_animIndex += m_animMoveSpriteIndex;
 }
 
 // 引数で渡された値で地面に立っているか判定し、オフセットする

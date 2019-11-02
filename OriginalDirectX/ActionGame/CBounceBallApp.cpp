@@ -131,15 +131,15 @@ void CBounceBallApp::doPlaying()
 			}
 			int inputX = 0;
 			int inputY = 0;
-			eGravityDirection inputDir = eGNone;
+			eSpriteDirection inputDir = eSpriteNone;
 			if (m_pDirectInput->isKeyPressed(DIK_LEFT))		inputX -= 1;
 			if (m_pDirectInput->isKeyPressed(DIK_RIGHT))	inputX += 1;
 			if (m_pDirectInput->isKeyPressed(DIK_UP))		inputY += 1;
 			if (m_pDirectInput->isKeyPressed(DIK_DOWN))		inputY -= 1;
-			if (m_pDirectInput->isPressedOnce(DIK_W))		inputDir = eGUp;
-			if (m_pDirectInput->isPressedOnce(DIK_A))		inputDir = eGLeft;
-			if (m_pDirectInput->isPressedOnce(DIK_D))		inputDir = eGRight;
-			if (m_pDirectInput->isPressedOnce(DIK_S))		inputDir = eGDown;
+			if (m_pDirectInput->isPressedOnce(DIK_W))		inputDir = eSpriteUp;
+			if (m_pDirectInput->isPressedOnce(DIK_A))		inputDir = eSpriteLeft;
+			if (m_pDirectInput->isPressedOnce(DIK_D))		inputDir = eSpriteRight;
+			if (m_pDirectInput->isPressedOnce(DIK_S))		inputDir = eSpriteDownRight;
 
 			m_pMapManager->update(m_frameCounter, inputX, inputY, inputDir, m_pDirectInput->isPressedOnce(DIK_SPACE));
 		}

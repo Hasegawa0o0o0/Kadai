@@ -92,9 +92,15 @@ std::unique_ptr<CMapManager> CMapManager::create(
 void CMapManager::init(ID3D11Device* pDevice_, ID3D11DeviceContext* pDeviceContext_, D3D11_VIEWPORT viewPort_[], LPCWSTR shaderName_)
 {
 	// 無理やりUV座標作成
-	if (gTexel8_7.size() <= 0)
+	if ((int)gTexel8_7.size() <= 0)
 	{
-		gTexel8_7.push_back(QuadrangleTexel{ { k1_7 * 0, k1_8 * 1 },{ k1_7 * 0, k1_8 * 0 },{ k1_7 * 1, k1_8 * 1 },{ k1_7 * 1, k1_8 * 0 } });
+		for (int y = 0; y < 8; ++y)
+		{
+			for (int x = 0; x < 7; ++x)
+			{
+				gTexel8_7.push_back(QuadrangleTexel{ { k1_7 * x, k1_8 * (y + 1) },{ k1_7 * x, k1_8 * y },{ k1_7 * (x + 1), k1_8 * (y + 1) },{ k1_7 * (x + 1), k1_8 * y } });
+			}
+		}
 	}
 	for (int y = 0; y < kMapVertical; y++)
 	{
@@ -152,7 +158,7 @@ CMapManager::~CMapManager()
 * @param frameCnt_	フレーム数
 * @return	無し
 */
-void CMapManager::update(int frameCnt_, int inputX_, int inputY_, eGravityDirection dir_, bool jump_)
+void CMapManager::update(int frameCnt_, int inputX_, int inputY_, eSpriteDirection dir_, bool jump_)
 {
 	 //!< ゲームクリア
 	//if (m_DotCounter <= 0)			throw eGameClear;
@@ -164,9 +170,8 @@ void CMapManager::update(int frameCnt_, int inputX_, int inputY_, eGravityDirect
 		m_animIndexDot++;		m_animIndexDot		= m_animIndexDot	>= gTexel1_3.size() ? 0 : m_animIndexDot;
 		m_animIndexEnemy++;		m_animIndexEnemy	= m_animIndexEnemy	>= gTexel1_3.size() ? 0 : m_animIndexEnemy;
 	}
+	m_pPlayer->move({ (FLOAT)inputX_ * 2.0f, (FLOAT)inputY_ * 2.0f, 0.0f, 0.0f });
 	m_animIndexPlayer = m_pPlayer->getAnimIndex();
-	m_pPlayer->moveHorizone(inputX_);
-	m_pPlayer->moveVertical(inputY_);
 	m_pPlayer->offsetPos(m_pPlayer->getSpeed());
 	m_pPlayer->recomposeColPos();
 	XMFLOAT4 checkPos = {};
