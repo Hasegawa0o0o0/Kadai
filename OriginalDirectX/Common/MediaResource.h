@@ -13,6 +13,7 @@
  */
 #define HLSL_Background	L"Media/Background.hlsl"
 #define HLSL_PlaneHLSL	L"Media/Spaceship.hlsl"
+#define HLSL_BlendHLSL	L"Media/BlendHLSL.hlsl"
 
 /**
  * ƒŠƒ\[ƒX ‰æ‘œ

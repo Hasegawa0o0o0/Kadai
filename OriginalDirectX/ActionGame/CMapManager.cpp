@@ -343,7 +343,7 @@ void CMapManager::render(XMFLOAT4X4 matView_, XMFLOAT4X4 matProj_, vector<shared
 		}
 	}
 	//m_pPlayer->debugRectRender(matView_, matProj_, vTexture_[eDarkTexture]);
-	m_pPlayer->render(matView_, matProj_, vTexture_[ePlayerTexture], m_animIndexPlayer);
+	m_pPlayer->render(matView_, matProj_, vTexture_[ePlayerTexture], m_animIndexPlayer, { 1.0f, 0.0f, 0.0f, 0.0f});
 	m_pGoal->render(matView_, matProj_, vTexture_[eGoalTexture]);
 
 	if (m_pEnemy != NULL)
