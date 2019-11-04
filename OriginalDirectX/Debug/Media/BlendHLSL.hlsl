@@ -35,6 +35,9 @@ float4 PS( VS_OUTPUT input  ) : SV_Target
 {
 	float4 pix = g_texDecal.Sample(g_samLinear, input.Tex);
 	pix.r = pix.r + g_vDiffuse.r;
+	pix.g = pix.g + g_vDiffuse.g;
+	pix.b = pix.b + g_vDiffuse.b;
+	pix.a = pix.a + g_vDiffuse.a;
 	return pix;
 }
 
