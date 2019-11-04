@@ -161,7 +161,7 @@
     <ClInclude Include="..\Common\MediaResource.h" />
     <ClInclude Include="CFootprint.h" />
     <ClInclude Include="Kadai.h" />
-    <ClInclude Include="CBounceBallApp.h" />
+    <ClInclude Include="CKadaiApp.h" />
     <ClInclude Include="CPlayer.h" />
     <ClInclude Include="CText.h" />
     <ClInclude Include="DotEat.h" />
@@ -183,7 +183,7 @@
     <ClCompile Include="..\Common\GamePGUtil.cpp" />
     <ClCompile Include="CFootprint.cpp" />
     <ClCompile Include="Kadai.cpp" />
-    <ClCompile Include="CBounceBallApp.cpp" />
+    <ClCompile Include="CKadaiApp.cpp" />
     <ClCompile Include="CDotEatApp.cpp" />
     <ClCompile Include="CMapChip.cpp" />
     <ClCompile Include="CMapManager.cpp" />

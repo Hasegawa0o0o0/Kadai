@@ -9,7 +9,7 @@
 #include "Kadai.h"
 
 //! グローバル変数:
-std::unique_ptr<CBounceBallApp> g_pApp = NULL;
+std::unique_ptr<CKadaiApp> g_pApp = NULL;
 
 /**
  * 関数プロトタイプの宣言
@@ -38,7 +38,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, INT)
 
 	srand((unsigned int)time(NULL));
 
-	g_pApp = unique_ptr<CBounceBallApp>(new CBounceBallApp());
+	g_pApp = unique_ptr<CKadaiApp>(new CKadaiApp());
 	if (g_pApp != NULL)
 	{
 		if (SUCCEEDED(g_pApp->initWindow(hInstance, WndProc, 0, 0, WINDOW_WIDTH,

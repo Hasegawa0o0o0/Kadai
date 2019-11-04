@@ -9,4 +9,4 @@
 #include "stdafx.h"
 #include "resource.h"
 #include "CDotEatApp.h"
-#include "CBounceBallApp.h"
+#include "CKadaiApp.h"

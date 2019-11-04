@@ -138,32 +138,46 @@ void CPlayer::move(XMFLOAT4 speed_)
 // 足跡を一つアクティブにする
 void CPlayer::activateFootprint()
 {
+	// 足跡をアクティベートする位置
+	XMFLOAT4 footPos = m_partCol.foot.pos;
 	// 足跡の角度を変える
 	FLOAT degree = 0.0f;
 	switch (m_spriteDirection)
 	{
 	case eSpriteUp:
+		footPos.x += 8.0f * m_footprintSign - 4.0f;
 		break;
 	case eSpriteUpLeft:
 		degree += 45.0f;
+		footPos.x += cos(45.0f) * 8.0f * m_footprintSign - cos(45.0f) * 8.0f / 2.0f;
+		footPos.y += sin(45.0f) * 8.0f * m_footprintSign - sin(45.0f) * 8.0f / 2.0f;
 		break;
 	case eSpriteLeft:
 		degree += 90.0f;
+		footPos.y += 8.0f * m_footprintSign - 4.0f;
 		break;
 	case eSpriteDownLeft:
 		degree += 135.0f;
+		footPos.x += cos(135.0f) * 8.0f * m_footprintSign - cos(135.0f) * 8.0f / 2.0f;
+		footPos.y += sin(135.0f) * 8.0f * m_footprintSign - sin(135.0f) * 8.0f / 2.0f;
 		break;
 	case eSpriteDown:
 		degree += 180.0f;
+		footPos.x -= 8.0f * m_footprintSign - 4.0f;
 		break;
 	case eSpriteDownRight:
 		degree += 225.0f;
+		footPos.x += cos(225.0f) * 8.0f * m_footprintSign - cos(225.0f) * 8.0f / 2.0f;
+		footPos.y -= sin(225.0f) * 8.0f * m_footprintSign - sin(225.0f) * 8.0f / 2.0f;
 		break;
 	case eSpriteRight:
 		degree += 270.0f;
+		footPos.y -= 8.0f * m_footprintSign - 4.0f;
 		break;
 	case eSpriteUpRight:
 		degree += 315.0f;
+		footPos.x += cos(315.0f) * 8.0f * m_footprintSign - cos(315.0f) * 8.0f / 2.0f;
+		footPos.y -= sin(315.0f) * 8.0f * m_footprintSign - sin(315.0f) * 8.0f / 2.0f;
 		break;
 	default:
 		break;
@@ -174,8 +188,9 @@ void CPlayer::activateFootprint()
 	{
 		if (!itr->get()->getActive())
 		{
-			itr->get()->activate(TRUE, m_partCol.foot.pos);
+			itr->get()->activate(TRUE, footPos);
 			itr->get()->setAngleZ(degree);
+			m_footprintSign = !m_footprintSign;
 			break;
 		}
 	}

@@ -90,9 +90,6 @@
     <ClInclude Include="DotEat.h">
       <Filter>ヘッダー ファイル\App</Filter>
     </ClInclude>
-    <ClInclude Include="CBounceBallApp.h">
-      <Filter>ヘッダー ファイル\App</Filter>
-    </ClInclude>
     <ClInclude Include="CPlayer.h">
       <Filter>ヘッダー ファイル\View</Filter>
     </ClInclude>
@@ -104,6 +101,9 @@
     </ClInclude>
     <ClInclude Include="CFootprint.h">
       <Filter>ヘッダー ファイル\View</Filter>
+    </ClInclude>
+    <ClInclude Include="CKadaiApp.h">
+      <Filter>ヘッダー ファイル\App</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -143,9 +143,6 @@
     <ClCompile Include="..\Common\GamePGUtil.cpp">
       <Filter>ソース ファイル\Common</Filter>
     </ClCompile>
-    <ClCompile Include="CBounceBallApp.cpp">
-      <Filter>ソース ファイル\App</Filter>
-    </ClCompile>
     <ClCompile Include="CPlayer.cpp">
       <Filter>ソース ファイル\View</Filter>
     </ClCompile>
@@ -157,6 +154,9 @@
     </ClCompile>
     <ClCompile Include="CFootprint.cpp">
       <Filter>ソース ファイル\View</Filter>
+    </ClCompile>
+    <ClCompile Include="CKadaiApp.cpp">
+      <Filter>ソース ファイル\App</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
