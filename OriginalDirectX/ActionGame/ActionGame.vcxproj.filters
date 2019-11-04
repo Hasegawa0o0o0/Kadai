@@ -102,6 +102,9 @@
     <ClInclude Include="Kadai.h">
       <Filter>ヘッダー ファイル\App</Filter>
     </ClInclude>
+    <ClInclude Include="CFootprint.h">
+      <Filter>ヘッダー ファイル\View</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -151,6 +154,9 @@
     </ClCompile>
     <ClCompile Include="Kadai.cpp">
       <Filter>ソース ファイル\App</Filter>
+    </ClCompile>
+    <ClCompile Include="CFootprint.cpp">
+      <Filter>ソース ファイル\View</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -172,7 +172,6 @@ void CMapManager::update(int frameCnt_, int inputX_, int inputY_, eSpriteDirecti
 	}
 	m_pPlayer->move({ (FLOAT)inputX_ * 2.0f, (FLOAT)inputY_ * 2.0f, 0.0f, 0.0f });
 	m_animIndexPlayer = m_pPlayer->getAnimIndex();
-	m_pPlayer->offsetPos(m_pPlayer->getSpeed());
 	m_pPlayer->recomposeColPos();
 	XMFLOAT4 checkPos = {};
 	checkPos.y -= isHitBlock(m_pPlayer->getPartCol().head.pos, m_pPlayer->getPartCol().head.size, eY);
@@ -343,7 +342,7 @@ void CMapManager::render(XMFLOAT4X4 matView_, XMFLOAT4X4 matProj_, vector<shared
 		}
 	}
 	//m_pPlayer->debugRectRender(matView_, matProj_, vTexture_[eDarkTexture]);
-	m_pPlayer->render(matView_, matProj_, vTexture_[ePlayerTexture], m_animIndexPlayer, { 1.0f, 0.0f, 0.0f, 0.0f});
+	m_pPlayer->render(matView_, matProj_, vTexture_, m_animIndexPlayer, { 0.0f, 0.0f, 0.0f, 0.0f});
 	m_pGoal->render(matView_, matProj_, vTexture_[eGoalTexture]);
 
 	if (m_pEnemy != NULL)

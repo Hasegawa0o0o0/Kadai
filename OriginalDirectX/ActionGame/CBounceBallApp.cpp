@@ -53,6 +53,7 @@ void CBounceBallApp::createTexture()
 	m_pvTexture.push_back(CTexture::create(m_pDevice, Tex_Enemy));
 	m_pvTexture.push_back(CTexture::create(m_pDevice, Tex_Dark));
 	m_pvTexture.push_back(CTexture::create(m_pDevice, Tex_Goal));
+	m_pvTexture.push_back(CTexture::create(m_pDevice, Tex_Footprint));
 }
 
 /**

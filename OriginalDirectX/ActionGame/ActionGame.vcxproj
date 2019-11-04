@@ -159,6 +159,7 @@
     <ClInclude Include="..\Common\DirectXTex-master\WICTextureLoader\WICTextureLoader.h" />
     <ClInclude Include="..\Common\GamePGUtil.h" />
     <ClInclude Include="..\Common\MediaResource.h" />
+    <ClInclude Include="CFootprint.h" />
     <ClInclude Include="Kadai.h" />
     <ClInclude Include="CBounceBallApp.h" />
     <ClInclude Include="CPlayer.h" />
@@ -180,6 +181,7 @@
     <ClCompile Include="..\Common\CTexture.cpp" />
     <ClCompile Include="..\Common\DirectXTex-master\WICTextureLoader\WICTextureLoader.cpp" />
     <ClCompile Include="..\Common\GamePGUtil.cpp" />
+    <ClCompile Include="CFootprint.cpp" />
     <ClCompile Include="Kadai.cpp" />
     <ClCompile Include="CBounceBallApp.cpp" />
     <ClCompile Include="CDotEatApp.cpp" />

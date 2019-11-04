@@ -2,6 +2,7 @@
 
 #include "stdafx.h"
 #include "CMapChip.h"
+#include "CFootprint.h"
 #include "MediaResource.h"
 
 typedef enum eSpriteDirection {
@@ -18,7 +19,7 @@ typedef enum eSpriteDirection {
 
 
 class CPlayer : public CMapChip {
-	typedef CMapChip supre;
+	typedef CMapChip super;
 
 	PartiallyCol m_partCol						= {};			// 部分的な衝突判定
 	eSpriteDirection m_spriteDirection			= eSpriteNone;	// スプライトのキャラクターが向いている方向
@@ -27,6 +28,10 @@ class CPlayer : public CMapChip {
 	int m_animFrame								= 0;			// アニメーションさせるまでのフレーム数
 	const int kAnimFrameMax						= 4;			// アニメーションさせるフレーム数
 	int m_footprintSign							= 1;			// 足跡を生成するための符号
+	int m_footprintActivateCnt					= 0;			// 足跡をアクティブにするまでのカウント数
+	const int kFootprintActivateCntMax			= 4;			// 足跡をアクティブにするカウント数
+	XMFLOAT4 m_previousPosition					= {};			// 1フレーム前の位置
+	vector<shared_ptr<CFootprint>> m_footprintList;				// 足跡のリスト
 	vector<unique_ptr<CPicture>> m_debugRect;					// デバッグ用判定可視化
 public:
 	static std::unique_ptr<CPlayer> create(
@@ -63,8 +68,11 @@ public:
 	void move(XMFLOAT4 speed_);
 	// 引数で渡された値で地面に立っているか判定し、オフセットする
 	void checkAndOffset(XMFLOAT4 check_);
+	// 足跡を一つアクティブにする
+	void activateFootprint();
 	PartiallyCol getPartCol()const { return m_partCol; }
 	int getAnimIndex()const { return m_animIndex; }
+	virtual void render(XMFLOAT4X4 matView_, XMFLOAT4X4 matProj_, vector<shared_ptr<CTexture>> vTexture_, size_t texelIndex_ = 0, XMFLOAT4 diffuse_ = { 0, 0, 0, 0 });
 	void debugRectRender(XMFLOAT4X4 matView_, XMFLOAT4X4 matProj_, shared_ptr<CTexture> texture_)
 	{
 		vector<unique_ptr<CPicture>>::iterator itr = m_debugRect.begin();
