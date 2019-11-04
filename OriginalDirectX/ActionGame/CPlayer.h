@@ -29,8 +29,7 @@ class CPlayer : public CMapChip {
 	const int kAnimFrameMax						= 4;			// アニメーションさせるフレーム数
 	int m_footprintSign							= 1;			// 足跡を生成するための符号
 	int m_footprintActivateCnt					= 0;			// 足跡をアクティブにするまでのカウント数
-	const int kFootprintActivateCntMax			= 4;			// 足跡をアクティブにするカウント数
-	XMFLOAT4 m_previousPosition					= {};			// 1フレーム前の位置
+	const int kFootprintActivateCntMax			= 8;			// 足跡をアクティブにするカウント数
 	vector<shared_ptr<CFootprint>> m_footprintList;				// 足跡のリスト
 	vector<unique_ptr<CPicture>> m_debugRect;					// デバッグ用判定可視化
 public:

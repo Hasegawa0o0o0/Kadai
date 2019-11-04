@@ -46,7 +46,7 @@ public:
 
 	CMapManager();
 	~CMapManager();
-	void update(int frameCnt_, int inputX_, int inputY_, eGravityDirection dir_, bool jump_);
+	void update(int frameCnt_, int inputX_, int inputY_, bool jump_);
 	FLOAT isHitBlock(XMFLOAT4 pos_, XMFLOAT2 size_, eCheckAxis check_);
 	BOOL encounterEachOther();
 	BOOL isItMovable(std::shared_ptr<CMapChip> obj_, eDirection direction_);

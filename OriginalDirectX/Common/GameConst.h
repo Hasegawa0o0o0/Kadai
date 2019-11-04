@@ -66,7 +66,7 @@ const int kChipHeight = 32;
 const XMFLOAT2 kBlockSize	= { 32.0f , 32.0f };
 const XMFLOAT2 kDotSize		= { 16.0f , 16.0f };
 const XMFLOAT2 kPlayerSize	= { 32.0f , 32.0f };
-const XMFLOAT2 kFootprintSize = { 16.0f, 32.0f };
+const XMFLOAT2 kFootprintSize = { 5.0f, 10.0f };
 const XMFLOAT2 kEnemySize	= { 32.0f , 32.0f };
 /* @} */
 

@@ -112,12 +112,9 @@ void CPlayer::move(XMFLOAT4 speed_)
 	}
 	m_animIndex += m_animMoveSpriteIndex;
 	// 移動
-	m_previousPosition = m_position.pos;
 	offsetPos(m_speed);
-	// 1フレーム前から動いているか確認する
-	if (m_previousPosition.x != m_position.pos.x ||
-		m_previousPosition.y != m_position.pos.y ||
-		m_previousPosition.z != m_position.pos.z)
+	// 動いているか確認する
+	if ((int)m_speed.x != 0 || (int)m_speed.y != 0)
 	{
 		++m_footprintActivateCnt;
 	}
@@ -141,12 +138,44 @@ void CPlayer::move(XMFLOAT4 speed_)
 // 足跡を一つアクティブにする
 void CPlayer::activateFootprint()
 {
+	// 足跡の角度を変える
+	FLOAT degree = 0.0f;
+	switch (m_spriteDirection)
+	{
+	case eSpriteUp:
+		break;
+	case eSpriteUpLeft:
+		degree += 45.0f;
+		break;
+	case eSpriteLeft:
+		degree += 90.0f;
+		break;
+	case eSpriteDownLeft:
+		degree += 135.0f;
+		break;
+	case eSpriteDown:
+		degree += 180.0f;
+		break;
+	case eSpriteDownRight:
+		degree += 225.0f;
+		break;
+	case eSpriteRight:
+		degree += 270.0f;
+		break;
+	case eSpriteUpRight:
+		degree += 315.0f;
+		break;
+	default:
+		break;
+	}
+	// 足跡のアクティベート
 	vector<shared_ptr<CFootprint>>::iterator itr = m_footprintList.begin();
 	for (itr; itr != m_footprintList.end(); ++itr)
 	{
 		if (!itr->get()->getActive())
 		{
-			itr->get()->activate(TRUE, m_position.pos);
+			itr->get()->activate(TRUE, m_partCol.foot.pos);
+			itr->get()->setAngleZ(degree);
 			break;
 		}
 	}
@@ -169,7 +198,9 @@ void CPlayer::render(XMFLOAT4X4 matView_, XMFLOAT4X4 matProj_, vector<shared_ptr
 	{
 		if (itr->get()->getActive())
 		{
-			itr->get()->render(matView_, matProj_, vTexture_[eFootprintTexture], 0, diffuse_);
+			// ディフューズ色を取得してレンダリング
+			FLOAT diffuse = itr->get()->getRGBDiffuseValue();
+			itr->get()->render(matView_, matProj_, vTexture_[eFootprintTexture], 0, { diffuse, diffuse, diffuse, 0.0f} );
 		}
 	}
 }

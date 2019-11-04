@@ -21,7 +21,7 @@ const eChipType kMap[kMapVertical][kMapHorizontal]
 	{	eBlock,	eEmpty,	eEmpty,	eEmpty,	eBlock,	eEmpty,	eEmpty,	eEmpty,	eEmpty,	eEmpty,	eEmpty,	eEmpty,	eBlock,	eEmpty,	eEmpty,	eEmpty,	eBlock },
 	{	eBlock,	eEmpty,	eEmpty,	eEmpty,	eEmpty,	eEmpty,	eEmpty,	eEmpty,	eEmpty,	eEmpty,	eEmpty,	eEmpty,	eBlock,	eEmpty,	eEmpty,	eBlock,	eBlock },
 	{	eBlock,	eEmpty,	eEmpty,	eEmpty,	eEmpty,	eEmpty,	eEmpty,	eBlock,	eBlock,	eBlock,	eEmpty,	eEmpty,	eBlock,	eEmpty,	eEmpty,	eEmpty,	eBlock },
-	{	eBlock,	eEmpty,	eEmpty,	eEmpty,	eEmpty,	eEmpty,	eEmpty,	eBlock,	eBlock,	eBlock,	eEmpty,	eEmpty,	eEmpty,	eBlock,	eEmpty,	eGoal,	eBlock },
+	{	eBlock,	eEmpty,	eEmpty,	eEmpty,	eEmpty,	eEmpty,	eEmpty,	eBlock,	eBlock,	eBlock,	eEmpty,	eEmpty,	eEmpty,	eBlock,	eEmpty,	eEmpty,	eBlock },
 	{	eBlock,	eBlock,	eBlock,	eBlock,	eBlock,	eBlock,	eBlock,	eBlock,	eBlock,	eBlock,	eBlock,	eBlock,	eBlock,	eBlock,	eBlock,	eBlock,	eBlock },
 };
 
@@ -158,18 +158,18 @@ CMapManager::~CMapManager()
 * @param frameCnt_	フレーム数
 * @return	無し
 */
-void CMapManager::update(int frameCnt_, int inputX_, int inputY_, eSpriteDirection dir_, bool jump_)
+void CMapManager::update(int frameCnt_, int inputX_, int inputY_, bool jump_)
 {
 	 //!< ゲームクリア
 	//if (m_DotCounter <= 0)			throw eGameClear;
 	//if (encounterEachOther())		throw eGameOver;
 
-	if (frameCnt_ % 10 == 0)
-	{
+	//if (frameCnt_ % 10 == 0)
+	//{
 		//m_animIndexPlayer++;	m_animIndexPlayer	= m_animIndexPlayer	>= gTexel1_5.size() ? 0 : m_animIndexPlayer;
-		m_animIndexDot++;		m_animIndexDot		= m_animIndexDot	>= gTexel1_3.size() ? 0 : m_animIndexDot;
-		m_animIndexEnemy++;		m_animIndexEnemy	= m_animIndexEnemy	>= gTexel1_3.size() ? 0 : m_animIndexEnemy;
-	}
+		//m_animIndexDot++;		m_animIndexDot		= m_animIndexDot	>= gTexel1_3.size() ? 0 : m_animIndexDot;
+		//m_animIndexEnemy++;		m_animIndexEnemy	= m_animIndexEnemy	>= gTexel1_3.size() ? 0 : m_animIndexEnemy;
+	//}
 	m_pPlayer->move({ (FLOAT)inputX_ * 2.0f, (FLOAT)inputY_ * 2.0f, 0.0f, 0.0f });
 	m_animIndexPlayer = m_pPlayer->getAnimIndex();
 	m_pPlayer->recomposeColPos();
@@ -179,15 +179,15 @@ void CMapManager::update(int frameCnt_, int inputX_, int inputY_, eSpriteDirecti
 	checkPos.x -= isHitBlock(m_pPlayer->getPartCol().right.pos, m_pPlayer->getPartCol().right.size, eX);
 	checkPos.x += isHitBlock(m_pPlayer->getPartCol().left.pos, m_pPlayer->getPartCol().left.size, eX);
 	m_pPlayer->checkAndOffset(checkPos);
-	if (m_pPlayer->collisionRect(m_pGoal->getPos(), {16.0f, 16.0f} ))
-	{
-		throw eGameClear;
-	}
-	if (frameCnt_ % 10 == 0)
-	{
-		eDirection dir[] = { eLeft, eRight, eUp, eDown };
-		moveEnemy(dir[rand() % 4]);	 //!< 敵の移動
-	}
+	//if (m_pPlayer->collisionRect(m_pGoal->getPos(), {16.0f, 16.0f} ))
+	//{
+	//	throw eGameClear;
+	//}
+	//if (frameCnt_ % 10 == 0)
+	//{
+	//	eDirection dir[] = { eLeft, eRight, eUp, eDown };
+	//	moveEnemy(dir[rand() % 4]);	 //!< 敵の移動
+	//}
 }
 
 // ブロックに当たったかどうか
@@ -343,7 +343,7 @@ void CMapManager::render(XMFLOAT4X4 matView_, XMFLOAT4X4 matProj_, vector<shared
 	}
 	//m_pPlayer->debugRectRender(matView_, matProj_, vTexture_[eDarkTexture]);
 	m_pPlayer->render(matView_, matProj_, vTexture_, m_animIndexPlayer, { 0.0f, 0.0f, 0.0f, 0.0f});
-	m_pGoal->render(matView_, matProj_, vTexture_[eGoalTexture]);
+	//m_pGoal->render(matView_, matProj_, vTexture_[eGoalTexture]);
 
 	if (m_pEnemy != NULL)
 	{

@@ -30,6 +30,7 @@ void CBounceBallApp::initCameraInfo()
 	m_far = 1000.0f;							//!< 後方クリップ
 }
 
+// テクスチャの作成
 void CBounceBallApp::createTexture()
 {
 	if (m_pvTexture.size() != 0)
@@ -100,83 +101,26 @@ void CBounceBallApp::createMap()
 
 void CBounceBallApp::doOpenning()
 {
-	if ((int)m_pvText.size() == 0)
-	{
-		m_pvText.push_back(CText::create(m_pDevice, m_pDeviceContext, m_viewPort, HLSL_PlaneHLSL, Tex_Font,
-			{ 32.0f * 2.5f, 32.0f * 3.0f, 0.0 , 0.0f }, { 24.0f, 48.0f }, gTextTexel, "Start To Press X"));
-	}
-	if (m_pDirectInput->isPressedOnce(DIK_X))
-	{
-		m_gameStatus = ePlaying;
-		m_pvText[0]->clearText();
-		m_pvText.clear();
-		m_pvText.push_back(CText::create(m_pDevice, m_pDeviceContext, m_viewPort, HLSL_PlaneHLSL, Tex_Font,
-			{ 32.0f * 8.0f, 32.0f * 6.0f, 0.0 , 0.0f }, { 64.0f, 128.0f }, gTextTexel, "00000"));
-	}
+	m_gameStatus = ePlaying;
 }
 
 void CBounceBallApp::doPlaying()
 {
 	++m_frameCounter;
-	if (m_isGameStart)
+	try
 	{
-		try
-		{
-			// 残り時間のテキストを変える
-			if (m_frameCounter % 60 == 0)
-			{
-				int nowTime = m_frameCounter / 60;
-				m_pvText[0]->resetTest();
-				m_pvText[0]->setText(60 - nowTime);
-				if (nowTime == 60) { throw eGameOver; }
-			}
-			int inputX = 0;
-			int inputY = 0;
-			eSpriteDirection inputDir = eSpriteNone;
-			if (m_pDirectInput->isKeyPressed(DIK_LEFT))		inputX -= 1;
-			if (m_pDirectInput->isKeyPressed(DIK_RIGHT))	inputX += 1;
-			if (m_pDirectInput->isKeyPressed(DIK_UP))		inputY += 1;
-			if (m_pDirectInput->isKeyPressed(DIK_DOWN))		inputY -= 1;
-			if (m_pDirectInput->isPressedOnce(DIK_W))		inputDir = eSpriteUp;
-			if (m_pDirectInput->isPressedOnce(DIK_A))		inputDir = eSpriteLeft;
-			if (m_pDirectInput->isPressedOnce(DIK_D))		inputDir = eSpriteRight;
-			if (m_pDirectInput->isPressedOnce(DIK_S))		inputDir = eSpriteDownRight;
+		int inputX = 0;
+		int inputY = 0;
+		if (m_pDirectInput->isKeyPressed(DIK_LEFT))		inputX -= 1;
+		if (m_pDirectInput->isKeyPressed(DIK_RIGHT))	inputX += 1;
+		if (m_pDirectInput->isKeyPressed(DIK_UP))		inputY += 1;
+		if (m_pDirectInput->isKeyPressed(DIK_DOWN))		inputY -= 1;
 
-			m_pMapManager->update(m_frameCounter, inputX, inputY, inputDir, m_pDirectInput->isPressedOnce(DIK_SPACE));
-		}
-		catch (eGameStatus status_)
-		{
-			if (status_ != ePlaying)
-			{
-				m_gameStatus = status_;
-				m_pvText[0]->clearText();
-				m_pvText.clear();
-			}
-		}
+		m_pMapManager->update(m_frameCounter, inputX, inputY, m_pDirectInput->isPressedOnce(DIK_SPACE));
 	}
-	// カウントダウンの表示
-	else
+	catch (eGameStatus status_)
 	{
-		if (m_frameCounter % 60 == 0) { --m_startCnt; }
-		m_pvText[0]->resetTest();
-		if (m_startCnt == -1)
-		{
-			m_isGameStart = true;
-			m_frameCounter = 0;
-			m_pvText[0]->clearText();
-			m_pvText.clear();
-			m_pvText.push_back(CText::create(m_pDevice, m_pDeviceContext, m_viewPort, HLSL_PlaneHLSL, Tex_Font,
-				{ 32.0f * 7.75f, 32.0f * 11.0f, 0.0 , 0.0f }, { 16.0f, 24.0f }, gTextTexel, "60"));
-		}
-		else if (m_startCnt == 0)
-		{
-			m_pvText[0]->setText("Start");
-			m_pvText[0]->setBeginPos({ 32.0f * 4.0f, 32.0f * 6.0f, 0.0f , 0.0f });
-		}
-		else
-		{
-			m_pvText[0]->setText(m_startCnt);
-		}
+		m_gameStatus = status_;
 	}
 }
 
@@ -204,9 +148,7 @@ void CBounceBallApp::doGameClear()
 		m_pvText.push_back(CText::create(m_pDevice, m_pDeviceContext, m_viewPort, HLSL_PlaneHLSL, Tex_Font,
 			{ 32.0f * 8.0f, 32.0f * 6.0f, 0.0 , 0.0f }, { 64.0f, 128.0f }, gTextTexel, "00000"));
 		createMap();
-		m_isGameStart = FALSE;
 		m_frameCounter = 0;
-		m_startCnt = 3;
 	}
 }
 
@@ -228,9 +170,7 @@ void CBounceBallApp::doGameOver()
 		m_pvText.push_back(CText::create(m_pDevice, m_pDeviceContext, m_viewPort, HLSL_PlaneHLSL, Tex_Font,
 			{ 32.0f * 8.0f, 32.0f * 6.0f, 0.0 , 0.0f }, { 64.0f, 128.0f }, gTextTexel, "00000"));
 		createMap();
-		m_isGameStart = FALSE;
 		m_frameCounter = 0;
-		m_startCnt = 3;
 	}
 }
 

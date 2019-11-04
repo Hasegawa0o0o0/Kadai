@@ -17,9 +17,6 @@ class CBounceBallApp : public CApplication {
 	std::vector<shared_ptr<CText>> m_pvText;
 	std::vector<shared_ptr<CTexture>> m_pvTexture;
 
-	BOOL m_isGameStart = FALSE;		// 入力を受けてゲームをスタートさせるか
-	int m_startCnt = 3;				// スタートさせるまでのカウントダウン
-
 	bool createSprites(void);
 	void initCameraInfo();
 	void createTexture();
