@@ -1,4 +1,5 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(387,5): warning MSB8028: 中間ディレクトリ (Debug\) に別のプロジェクト (ActionGame.vcxproj) と共有されているファイルが含まれています。これにより、クリーンしてリビルド動作が適切に行われない可能性があります。
-  CPlayer.cpp
+  Kadai.cpp
+  LINK : 前回のインクリメンタル リンクで C:\Users\yuuta\Desktop\Kadai\OriginalDirectX\Debug\Kadai.exe が見つからなかったか、ビルドされませんでした。フル リンクを行います。
   ActionGame.vcxproj -> C:\Users\yuuta\Desktop\Kadai\OriginalDirectX\Debug\Kadai.exe
   ActionGame.vcxproj -> C:\Users\yuuta\Desktop\Kadai\OriginalDirectX\Debug\Kadai.pdb (Partial PDB)
